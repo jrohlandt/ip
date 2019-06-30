@@ -22,6 +22,11 @@ Route::get('/demo', function () {
 
 Route::middleware(['auth'])->group(function() {
     Route::get('projects', 'ProjectController@index');
+    Route::get('projects/create', 'ProjectController@create');
     Route::post('projects', 'ProjectController@store');
     Route::get('projects/{id}', 'ProjectController@fetch');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -10,4 +10,9 @@ class Project extends Model
         'user_id',
         'title',
     ];
+
+    public function nodes()
+    {
+        return $this->hasMany(Node::class);
+    }
 }

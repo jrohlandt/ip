@@ -45,13 +45,17 @@ class ProjectController extends Controller
             'title' => request('title'),
         ]);
 
+        $project->nodes()->create(['title' => 'Parent node']);
+
         return response()->json(['project' => $project]);
     }
 
 
-    public function fetch(int $id): JsonResponse
+    public function fetch(int $id)
     {
-        $project = Project::where('user_id', Auth::user()->id)->findOrFail($id);
+        if (!request()->ajax()) return view('index');
+
+        $project = Project::with('nodes')->where('user_id', Auth::user()->id)->findOrFail($id);
         return response()->json(['project' => $project]);
     }
 
