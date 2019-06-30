@@ -20,5 +20,8 @@ Route::get('/demo', function () {
 });
 
 
-Route::post('projects', 'ProjectController@store');
-Route::get('projects/{id}', 'ProjectController@fetch');
+Route::middleware(['auth'])->group(function() {
+    Route::get('projects', 'ProjectController@index');
+    Route::post('projects', 'ProjectController@store');
+    Route::get('projects/{id}', 'ProjectController@fetch');
+});
