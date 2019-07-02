@@ -25,7 +25,6 @@ class ProjectController extends Controller
 
         $projects = Project::where('user_id', Auth::user()->id)->all();
         return response()->json(['projects' => $projects]);
-
     }
 
     /**
