@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function() {
 
     Route::post('projects/{projectId}/nodes', 'ProjectNodeController@store');
     Route::put('projects/{projectId}/nodes/{nodeId}', 'ProjectNodeController@update');
+    Route::delete('projects/{projectId}/nodes/{nodeId}', 'ProjectNodeController@destroy');
 
 });
 

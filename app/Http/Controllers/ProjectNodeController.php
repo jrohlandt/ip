@@ -8,6 +8,7 @@ use App\Http\Requests\NodeCreate as NodeUpdate;
 use App\Node;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class ProjectNodeController extends Controller
@@ -57,14 +58,13 @@ class ProjectNodeController extends Controller
         return response()->json([]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Node  $node
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Node $node)
+
+    public function destroy(int $projectId, int $nodeId): JsonResponse
     {
-        //
+        $project = Auth::user()->projects()->findOrFail($projectId);
+        $node = $project->nodes()->findOrFail($nodeId);
+        $node->delete();
+
+        return response()->json([]);
     }
 }

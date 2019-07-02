@@ -46,7 +46,6 @@ class NodeTest extends TestCase
 
     public function test_can_update_node()
     {
-        $this->withoutExceptionHandling();
         $project = factory(Project::class)->create(['user_id' => $this->user]);
         $node = $project->nodes()->create(['title' => 'Parent node', 'parent_id' => 0, 'url' => $this->url]);
 
@@ -63,6 +62,19 @@ class NodeTest extends TestCase
         $this->assertEquals($data['title'], $node->title);
         $this->assertEquals($data['parent_id'], $node->parent_id);
         $this->assertEquals($data['url'], $node->url);
+    }
+
+    public function test_can_delete_node()
+    {
+        $this->withoutExceptionHandling();
+        $project = factory(Project::class)->create(['user_id' => $this->user]);
+        $node = $project->nodes()->create(['title' => 'Parent node', 'parent_id' => 0, 'url' => $this->url]);
+
+        $response = $this->actingAs($this->user)->json('delete', "/projects/{$project->id}/nodes/{$node->id}", []);
+
+        $response->assertStatus(200);
+
+        $this->assertNull(Node::find($node->id));
     }
 
 }
