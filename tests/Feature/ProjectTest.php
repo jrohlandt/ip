@@ -22,7 +22,7 @@ class ProjectTest extends TestCase
 
     public function test_can_create_new_project()
     {
-        $data = ['title' => 'test title', 'options' => ['interaction' => 'on_end']];
+        $data = ['title' => 'test title'];
         $response = $this->actingAs($this->user)->json('post', '/projects', $data, $this->headers);
 
         $response->assertStatus(200);

@@ -59,7 +59,6 @@ class ProjectController extends Controller
     }
 
 
-
     public function update(ProjectUpdate $request, int $id): JsonResponse
     {
         $project = Auth::user()->projects()->findOrFail($id);

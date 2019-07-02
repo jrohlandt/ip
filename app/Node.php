@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Node extends Model
 {
     protected $fillable = [
-      'title',
+        'title',
+        'parent_id',
+        'url',
     ];
 
     public function project()

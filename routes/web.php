@@ -28,6 +28,9 @@ Route::middleware(['auth'])->group(function() {
     Route::put('projects/{id}', 'ProjectController@update');
     Route::delete('projects/{id}', 'ProjectController@destroy');
 
+    Route::post('projects/{projectId}/nodes', 'ProjectNodeController@store');
+    Route::put('projects/{projectId}/nodes/{nodeId}', 'ProjectNodeController@update');
+
 });
 
 Auth::routes();
