@@ -23,7 +23,8 @@ class ProjectController extends Controller
             return view('index');
         }
 
-        $projects = Project::where('user_id', Auth::user()->id)->all();
+        $projects = Auth::user()->projects;
+//        $projects = Project::where('user_id', Auth::user()->id)->get();
         return response()->json(['projects' => $projects]);
     }
 
@@ -39,10 +40,9 @@ class ProjectController extends Controller
 
     public function store(ProjectCreate $request): JsonResponse
     {
-        $project = Project::create([
-            'user_id' => Auth::user()->id,
-            'title' => request('title'),
-        ]);
+        $data = $request->validated();
+
+        $project = Auth::user()->projects()->create($data);
 
         $project->nodes()->create(['title' => 'Parent node']);
 
@@ -62,7 +62,11 @@ class ProjectController extends Controller
 
     public function update(ProjectUpdate $request, int $id): JsonResponse
     {
-        //
+        $project = Auth::user()->projects()->findOrFail($id);
+        $data = $request->validated();
+        $project->title = $data['title'];
+        $project->save();
+        return response()->json([]);
     }
 
 

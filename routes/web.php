@@ -25,6 +25,9 @@ Route::middleware(['auth'])->group(function() {
     Route::get('projects/create', 'ProjectController@create');
     Route::post('projects', 'ProjectController@store');
     Route::get('projects/{id}', 'ProjectController@fetch');
+    Route::put('projects/{id}', 'ProjectController@update');
+    Route::delete('projects/{id}', 'ProjectController@destroy');
+
 });
 
 Auth::routes();
