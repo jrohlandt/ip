@@ -34,6 +34,9 @@ Route::middleware(['auth'])->group(function() {
 
 });
 
+Route::get('player/{projectId}', 'PlayerController@play');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
