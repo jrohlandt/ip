@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function() {
 
 });
 
-Route::get('player/{projectId}', 'PlayerController@play');
+Route::get('watch/{projectId}', 'PlayerController@watch');
 
 
 Auth::routes();

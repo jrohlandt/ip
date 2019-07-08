@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class PlayerController extends Controller
 {
-    public function play(int $projectId)
+    public function watch(int $projectId)
     {
         $project = Project::findOrFail($projectId);
 
