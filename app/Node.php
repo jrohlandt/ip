@@ -10,6 +10,11 @@ class Node extends Model
         'title',
         'parent_id',
         'url',
+        'interactor',
+    ];
+
+    protected $casts = [
+      'interactor' => 'array',
     ];
 
     public function project()

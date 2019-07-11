@@ -36,9 +36,9 @@ class ProjectNodeController extends Controller
     // Store
     public function store(NodeCreate $request, int $projectId): JsonResponse
     {
-        $validated = $request->validated();
+        $data = $request->validated();
         $project = Auth::user()->projects()->findOrFail($projectId);
-        $node = $project->nodes()->create($validated);
+        $node = $project->nodes()->create($data);
 
         return response()->json(['node' => $node]);
     }
@@ -52,6 +52,7 @@ class ProjectNodeController extends Controller
         $node->title = $validated['title'];
         $node->parent_id = $validated['parent_id'];
         $node->url = $validated['url'];
+        $node->interactor = $validated['interactor'];
 
         $node->save();
 

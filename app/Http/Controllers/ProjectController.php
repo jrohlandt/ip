@@ -41,10 +41,10 @@ class ProjectController extends Controller
     public function store(ProjectCreate $request): JsonResponse
     {
         $data = $request->validated();
+        $data['settings'] = ['autoplay' => true];
 
         $project = Auth::user()->projects()->create($data);
-
-        $project->nodes()->create(['title' => 'Parent node']);
+        $project->createParentNode();
 
         return response()->json(['project' => $project]);
     }
