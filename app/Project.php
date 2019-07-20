@@ -27,7 +27,7 @@ class Project extends Model
             'parent_id' => 0,
             'title' => 'Parent node',
             'url' => '',
-            'interactor' => ["enabled" => false, "type" => "on_end"],
+            'interactor' => ["enabled" => true, "type" => "on_end"],
         ]);
     }
 }
