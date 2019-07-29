@@ -23,9 +23,8 @@ class ProjectController extends Controller
             return view('index');
         }
 
-        $projects = Auth::user()->projects;
-//        $projects = Project::where('user_id', Auth::user()->id)->get();
-        return response()->json(['projects' => $projects]);
+        $projects = Auth::user()->projects()->orderBy('updated_at', 'desc')->paginate(5);
+        return response()->json($projects);
     }
 
     /**
