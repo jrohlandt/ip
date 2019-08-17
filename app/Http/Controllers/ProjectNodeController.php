@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NodeCreate;
-use App\Http\Requests\NodeCreate as NodeUpdate;
+use App\Http\Requests\NodeUpdate;
 
 use App\Node;
 use Illuminate\Http\JsonResponse;
@@ -13,32 +13,12 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectNodeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     // Store
     public function store(NodeCreate $request, int $projectId): JsonResponse
     {
         $data = $request->validated();
         $project = Auth::user()->projects()->findOrFail($projectId);
-        $node = $project->nodes()->create($data);
+        $node = $project->createNode($data);
 
         return response()->json(['node' => $node]);
     }
@@ -47,12 +27,13 @@ class ProjectNodeController extends Controller
     public function update(NodeUpdate $request, int $projectId, int $nodeId): JsonResponse
     {
         $validated = $request->validated();
+
         $project = Auth::user()->projects()->findOrFail($projectId);
         $node = $project->nodes()->findOrFail($nodeId);
         $node->title = $validated['title'];
         $node->parent_id = $validated['parent_id'];
         $node->url = $validated['url'];
-        $node->interactor = $validated['interactor'];
+        $node->interactions = $validated['interactions'];
 
         $node->save();
 
@@ -64,7 +45,10 @@ class ProjectNodeController extends Controller
     {
         $project = Auth::user()->projects()->findOrFail($projectId);
         $node = $project->nodes()->findOrFail($nodeId);
-        $node->delete();
+//        dd($nodeId, $node, $node->isRootNode());
+        if (!$node->isRootNode()) {
+            $node->delete();
+        }
 
         return response()->json([]);
     }

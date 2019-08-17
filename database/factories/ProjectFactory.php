@@ -9,5 +9,6 @@ $factory->define(Project::class, function (Faker $faker) {
     return [
         'user_id' => 99,
         'title' => 'Test Title',
+        'settings' => []
     ];
 });

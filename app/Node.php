@@ -10,15 +10,21 @@ class Node extends Model
         'title',
         'parent_id',
         'url',
-        'interactor',
+        'interactions',
     ];
 
     protected $casts = [
-      'interactor' => 'array',
+        'parent_id' => 'integer',
+        'interactions' => 'array',
     ];
 
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function isRootNode()
+    {
+        return $this->parent_id === 0;
     }
 }

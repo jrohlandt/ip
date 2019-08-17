@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class NodeCreate extends FormRequest
+class NodeUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,6 +27,7 @@ class NodeCreate extends FormRequest
             'title' => 'required|string|max:64',
             'parent_id' => 'required|integer',
             'url' => 'string|nullable|max:1000',
+            'interactions' => 'required'
         ];
     }
 }

@@ -20,7 +20,7 @@ Route::get('/demo', function () {
 });
 
 
-Route::middleware(['auth'])->group(function() {
+//Route::middleware(['auth'])->group(function() {
     Route::get('projects', 'ProjectController@index');
     Route::get('projects/create', 'ProjectController@create');
     Route::post('projects', 'ProjectController@store');
@@ -32,7 +32,7 @@ Route::middleware(['auth'])->group(function() {
     Route::put('projects/{projectId}/nodes/{nodeId}', 'ProjectNodeController@update');
     Route::delete('projects/{projectId}/nodes/{nodeId}', 'ProjectNodeController@destroy');
 
-});
+//});
 
 Route::get('watch/{projectId}', 'PlayerController@watch');
 

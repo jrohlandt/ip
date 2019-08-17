@@ -16,6 +16,12 @@ class Project extends Model
         'settings' => 'array',
     ];
 
+    protected $defaultInteractions = [
+        'fork' => [
+            'enabled' => true, 'type' => 'on_end'
+        ]
+    ];
+
     public function nodes()
     {
         return $this->hasMany(Node::class);
@@ -27,7 +33,16 @@ class Project extends Model
             'parent_id' => 0,
             'title' => 'Parent node',
             'url' => '',
-            'interactor' => ["enabled" => true, "type" => "on_end"],
+            'interactions' => $this->defaultInteractions,
         ]);
+    }
+
+    public function createNode($data)
+    {
+        if (empty($data['interactions'])) {
+            $data['interactions'] = $this->defaultInteractions;
+        }
+
+        return $this->nodes()->create($data);
     }
 }
