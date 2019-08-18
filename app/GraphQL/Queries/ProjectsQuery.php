@@ -1,6 +1,6 @@
 <?php
 
-namespace App\GraphQL\Query;
+namespace App\GraphQL\Queries;
 
 use App\Project;
 use Rebing\GraphQL\Support\Facades\GraphQL;
@@ -12,8 +12,6 @@ class ProjectsQuery extends Query
 {
     protected $attributes = [
         'name' => 'projects',
-        'description' => 'get all projects',
-        'model' => Project::class,
     ];
 
     public function type(): Type

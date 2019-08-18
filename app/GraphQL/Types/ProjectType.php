@@ -1,6 +1,6 @@
 <?php
 
-namespace App\GraphQL\Type;
+namespace App\GraphQL\Types;
 
 use App\Project;
 use GraphQL\Type\Definition\Type;
@@ -21,10 +21,10 @@ class ProjectType extends GraphQLType
                 'type' => Type::nonNull(Type::int()),
                 'description' => 'MySQL id of the projects row'
             ],
-            'user_id' => [
-                'type' => Type::nonNull(Type::int()),
-                'description' => 'The project belongs to this user'
-            ],
+//            'user_id' => [
+//                'type' => Type::nonNull(Type::int()),
+//                'description' => 'The project belongs to this user'
+//            ],
             'title' => [
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'Project title'

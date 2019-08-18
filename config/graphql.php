@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-use App\GraphQL\Type\ProjectType;
-use App\GraphQL\Query\ProjectsQuery;
+use App\GraphQL\Types\ProjectType;
+use App\GraphQL\Queries\ProjectsQuery;
+use App\GraphQL\Queries\ProjectQuery;
 
 //use example\Mutation\ExampleMutation;
 //use example\Type\ExampleRelationType;
@@ -104,11 +105,13 @@ return [
             'query' => [
                 // 'example_query' => ExampleQuery::class,
                 'projects' => ProjectsQuery::class,
+                'project' => ProjectQuery::class,
             ],
             'mutation' => [
                 // 'example_mutation'  => ExampleMutation::class,
+                'newProject' => \App\GraphQL\Mutations\NewProjectMutation::class,
             ],
-            'middleware' => [],
+            'middleware' => ['auth'],
             'method'     => ['get', 'post'],
         ],
     ],
