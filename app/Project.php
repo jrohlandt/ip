@@ -13,7 +13,7 @@ class Project extends Model
     ];
 
     protected $casts = [
-//        'settings' => 'array',
+        'settings' => 'array',
     ];
 
     protected $defaultInteractions = [
