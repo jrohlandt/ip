@@ -28,6 +28,6 @@ class ProjectsQuery extends Query
 
     public function resolve($root, $args, $context, ResolveInfo $info)
     {
-        return Project::all();
+        return \Auth::user()->projects;
     }
 }
