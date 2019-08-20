@@ -8,6 +8,7 @@ use App\Project;
 use Closure;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
+use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\SelectFields;
 use Rebing\GraphQL\Support\Query;
@@ -26,7 +27,10 @@ class ProjectQuery extends Query
     public function args(): array
     {
         return [
-            'id' => ['name' => 'id', 'type' => Type::string()],
+            'id' => [
+                'name' => 'id',
+                'type' => Type::int()
+            ],
         ];
     }
 
@@ -37,10 +41,18 @@ class ProjectQuery extends Query
         $select = $fields->getSelect();
         $with = $fields->getRelations();
 
-//        return [
-//            'The project works',
-//        ];
+        if (isset($args['id'])) {
+            $project = Auth::user()->projects()->find($args['id']);
+        }
 
-        return Project::find($args['id']);
+
+        $project->nodes = json_decode($project->nodes);
+//        $project = Project::with($with)
+//            ->where('user_id', Auth::user()->id)
+//            ->find($args['id']);
+//
+//
+        return $project;
+
     }
 }

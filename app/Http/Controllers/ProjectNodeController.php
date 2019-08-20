@@ -33,7 +33,7 @@ class ProjectNodeController extends Controller
         $node->title = $validated['title'];
         $node->parent_id = $validated['parent_id'];
         $node->url = $validated['url'];
-        $node->interactions = $validated['interactions'];
+        $node->interactions = json_encode($validated['interactions']);
 
         $node->save();
 

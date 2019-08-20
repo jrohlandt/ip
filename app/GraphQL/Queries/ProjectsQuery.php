@@ -3,6 +3,7 @@
 namespace App\GraphQL\Queries;
 
 use App\Project;
+use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 use GraphQL\Type\Definition\ResolveInfo;
@@ -19,15 +20,18 @@ class ProjectsQuery extends Query
         return Type::listOf(GraphQL::type('Project'));
     }
 
-//    public function args(): array
-//    {
-//        return [
-//
-//        ];
-//    }
+    public function args(): array
+    {
+        return [
+            'id' => [
+                'name' => 'id',
+                'type' => Type::int()
+            ],
+        ];
+    }
 
     public function resolve($root, $args, $context, ResolveInfo $info)
     {
-        return \Auth::user()->projects;
+        return Auth::user()->projects;
     }
 }

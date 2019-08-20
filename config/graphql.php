@@ -131,6 +131,7 @@ return [
         // 'relation_example'  => ExampleRelationType::class,
         // \Rebing\GraphQL\Support\UploadType::class,
         'Project' => ProjectType::class,
+        'Node' => App\GraphQL\Types\NodeType::class,
     ],
 
     // The types will be loaded on demand. Default is to load all types on each request
