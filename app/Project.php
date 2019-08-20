@@ -39,9 +39,8 @@ class Project extends Model
 
     public function createNode($data)
     {
-        if (empty($data['interactions'])) {
-            $data['interactions'] = $this->defaultInteractions;
-        }
+        $data['interactions'] = !empty($data['interactions']) ? $data['interactions'] : $this->defaultInteractions;
+        $data['url'] = !empty($data['url']) ? $data['url'] : '';
 
         return $this->nodes()->create($data);
     }

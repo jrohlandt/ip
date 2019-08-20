@@ -26,7 +26,7 @@ class NodeCreate extends FormRequest
         return [
             'title' => 'required|string|max:64',
             'parent_id' => 'required|integer',
-            'url' => 'string|nullable|max:1000',
+            'url' => 'url|nullable|max:250',
         ];
     }
 }

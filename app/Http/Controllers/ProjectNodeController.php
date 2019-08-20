@@ -32,8 +32,8 @@ class ProjectNodeController extends Controller
         $node = $project->nodes()->findOrFail($nodeId);
         $node->title = $validated['title'];
         $node->parent_id = $validated['parent_id'];
-        $node->url = $validated['url'];
-        $node->interactions = json_encode($validated['interactions']);
+        $node->url = !empty($validated['url']) ? $validated['url'] : '';
+        $node->interactions = $validated['interactions'];
 
         $node->save();
 

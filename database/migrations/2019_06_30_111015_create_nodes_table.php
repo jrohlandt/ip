@@ -18,7 +18,7 @@ class CreateNodesTable extends Migration
             $table->unsignedBigInteger('parent_id')->default(0);
             $table->unsignedBigInteger('project_id');
             $table->string('title', 64);
-            $table->string('url')->nullable();
+            $table->string('url');
             $table->json('interactions');
             $table->timestamps();
         });
