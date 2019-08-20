@@ -20,6 +20,7 @@ Route::get('/demo', function () {
 });
 
 Route::get('watch/{projectId}', 'PlayerController@watch');
+Route::get('player/{id}', 'PlayerController@fetch');
 
 
 Auth::routes();

@@ -13,4 +13,12 @@ class PlayerController extends Controller
 
         return view('player', ['project' => $project]);
     }
+
+    public function fetch(int $id)
+    {
+        if (!request()->ajax()) return view('index');
+
+        $project = Project::with('nodes')->findOrFail($id);
+        return response()->json(['project' => $project]);
+    }
 }
