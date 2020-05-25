@@ -12,6 +12,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         factory(User::class)->create(['email' => 'demo@example.com']);
+         factory(User::class)->create([
+             'email' => 'demo@example.com',
+             'api_token' => 'somerandomstring',
+         ]);
     }
 }
